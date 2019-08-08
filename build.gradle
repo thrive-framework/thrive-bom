@@ -96,14 +96,17 @@ publishing {
 //todo document this
 ext {
     if (file("./repoCreds.properties").exists()){
+        println "Using credentials from local properties file"
         Properties creds = new Properties()
         file("./repoCreds.properties").withReader creds.&load
         user = creds.get("user")
         apiKey = creds.get("api-key")
     } else {
+        println "Using credentials from env vars"
         user = System.getenv('BINTRAY_USER')
         apiKey = System.getenv('BINTRAY_API_KEY')
     }
+    println "User: $user; #apiKey: ${apiKey.hashCode()}"
 }
 
 // to publish SNAPSHOTs to http://oss.jfrog.org/oss-snapshot-local/
