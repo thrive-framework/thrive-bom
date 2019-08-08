@@ -16,9 +16,6 @@ jobs:
       - checkout
       - run: ./gradlew assertIsRelease
       - run: ./gradlew handlePublications
-    branches:
-      only:
-        - master
 
   snapshot:
     docker:
@@ -27,9 +24,6 @@ jobs:
       - checkout
       - run: ./gradlew assertIsSnapshot
       - run: ./gradlew handlePublications
-    branches:
-      only:
-        - dev
 
 workflows:
   version: 2
@@ -40,8 +34,16 @@ workflows:
           type: approval
           requires:
             - validate
+          filters:
+            branches:
+              only:
+                - master
           context: JFrog
       - snapshot:
           requires:
             - validate
           context: JFrog
+          filters:
+            branches:
+              only:
+                - dev
