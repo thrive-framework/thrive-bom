@@ -30,6 +30,7 @@ ext {
     springBootAdminVersion = springBootVersion.split("[.]").take(3).join(".")
 }
 
+//todo: introduce build (or at least publishing) caching based on this section
 dependencyManagement {
     imports {
         //note to future self: order of BOM entries matter - later have higher prio
@@ -94,6 +95,7 @@ publishing {
 }
 
 //todo document this
+//deployment vars
 ext {
     if (file("./repoCreds.properties").exists()){
         println "Using credentials from local properties file"
@@ -114,6 +116,9 @@ ext {
 
 // to publish SNAPSHOTs to http://oss.jfrog.org/oss-snapshot-local/
 // and !SNAPSHOTs to http://oss.jfrog.org/oss-release-local/
+//todo add build number, name and CI server for CircleCI
+//links: https://www.jfrog.com/confluence/display/rtf/gradle+artifactory+plugin
+//https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 artifactory {
     contextUrl = 'https://oss.jfrog.org'
     resolve {
