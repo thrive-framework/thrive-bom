@@ -7,7 +7,7 @@ jobs:
     steps:
       # restore cached dependencies? or at least gradle wrapper?
       - checkout
-      - run: ./gradlew clean publishToMavenLocal
+      - run: ./gradlew publishToMavenLocal
 
   release:
     docker:
