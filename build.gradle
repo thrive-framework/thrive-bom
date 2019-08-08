@@ -106,7 +106,10 @@ ext {
         user = System.getenv('BINTRAY_USER')
         apiKey = System.getenv('BINTRAY_API_KEY')
     }
-    println "User: $user; #apiKey: ${apiKey.hashCode()}"
+    if (user == null || apiKey == null)
+        println "Username of api key is missing"
+    else
+        println "User: $user; #apiKey: ${apiKey.hashCode()}"
 }
 
 // to publish SNAPSHOTs to http://oss.jfrog.org/oss-snapshot-local/
@@ -166,6 +169,16 @@ task handlePublications(
     dependsOn artifactoryPublish
     if (!isSnapshot)
         dependsOn bintrayUpload
+}
+
+task assertCredentialsPresent(
+    group: "assertions",
+    description: "Fails if username or api key is missing; else - no-op"
+){
+    doLast {
+        assert project.ext.user
+        assert project.ext.apiKey
+    }
 }
 
 task assertIsRelease(
