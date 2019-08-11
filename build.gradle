@@ -167,6 +167,11 @@ bintray {
     }
 }
 
+task clean(
+    group: "build",
+    description: "Mock, no-op task to satisfy Jitpack"
+)
+
 task handlePublications(
     group: "publishing",
     description: "Upload to Artifactory (in case of snapshot and non-snapshot versions) and Bintray (in case of non-snapshots)"
