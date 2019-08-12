@@ -16,6 +16,18 @@ ext {
     springBootAdminVersion = springBootVersion.split("[.]").take(3).join(".")
 }
 
+repositories {
+    mavenCentral()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+    maven { url 'http://oss.jfrog.org/artifactory/oss-release-local/' }
+    maven { url 'https://repo.spring.io/milestone' }
+
+    maven {
+        name "jitpack"
+        url "https://jitpack.io"
+    }
+}
+
 //todo: introduce build (or at least publishing) caching based on this section
 dependencyManagement {
     imports {
