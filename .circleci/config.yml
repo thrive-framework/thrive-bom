@@ -9,43 +9,8 @@ jobs:
       - checkout
       - run: ./gradlew publishToMavenLocal
 
-  release:
-    docker:
-      - image: circleci/openjdk:8u181
-    steps:
-      - checkout
-      - run: ./gradlew assertCredentialsPresent
-      - run: ./gradlew assertIsRelease
-      - run: ./gradlew handlePublications
-
-  snapshot:
-    docker:
-      - image: circleci/openjdk:8u181
-    steps:
-      - checkout
-      - run: ./gradlew assertCredentialsPresent
-      - run: ./gradlew assertIsSnapshot
-      - run: ./gradlew handlePublications
-
 workflows:
   version: 2
-  main-workflow:
+  ci:
     jobs:
       - validate
-      - release:
-          type: approval
-          requires:
-            - validate
-          filters:
-            branches:
-              only:
-                - master
-          context: JFrog
-      - snapshot:
-          requires:
-            - validate
-          context: JFrog
-          filters:
-            branches:
-              only:
-                - dev
