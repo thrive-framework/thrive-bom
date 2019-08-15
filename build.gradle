@@ -73,6 +73,8 @@ dependencyManagement {
         dependency group: 'org.springframework.boot.experimental', name: 'spring-boot-starter-data-r2dbc', version: '0.1.0.M1'
         dependency group: 'org.springframework.boot.experimental', name: 'spring-boot-actuator-autoconfigure-r2dbc', version: '0.1.0.M1'
         dependency group: 'io.r2dbc', name: 'r2dbc-postgresql', version: '0.8.0.M8'
+
+        dependency group: "com.github.thrive-framework.thrive", name: "thrive-common", version: "0.3.0-SNAPSHOT"
     }
 }
 
